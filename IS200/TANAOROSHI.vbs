@@ -1,4 +1,5 @@
 '20231216 作成　小原征史　v1.0.0 変数、自作関数は大文字、その他はVBSの言語？
+'20240202 V1.0.1 該当月の変換で1桁月の場合に7桁にてコピーしていたのを8桁になる様に変更
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 
@@ -60,8 +61,9 @@ Function GetFormattedDate()
     'today = Date
 
     ' 現在の年と月を取得
+'WScript.Echo mid(Date,6,2)
 currentYear = Year(Date)
-currentMonth = Month(Date)
+currentMonth = mid(Date,6,2)
 lastDay = GetLastDayOfMonth(currentYear, currentMonth)
 
     'currentYear = Year(today)
@@ -89,3 +91,4 @@ Next
 Set OUTPUT_FILE = objFSO.CreateTextFile(OUTPUT_FILE_PATH, True)
 OUTPUT_FILE.Write Join(MODIFIED_LINES, vbCrLf)
 OUTPUT_FILE.Close
+
